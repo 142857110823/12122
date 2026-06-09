@@ -2035,7 +2035,58 @@ def _status_word(ok: bool, yes: str, no: str) -> str:
 def render_home():
     if os.environ.get("WATER_EROSION_UI_QA_SEED") == "1":
         st.warning("\u754c\u9762\u6d4b\u8bd5\u72b6\u6001\uff1a\u4ee5\u4e0b\u72b6\u6001\u4ec5\u7528\u4e8e\u4ea4\u4e92\u9a8c\u8bc1\uff0c\u4e0d\u4ee3\u8868\u79d1\u7814\u7ed3\u679c\u3002")
-    st.markdown(
+    hero_left, hero_right = st.columns([1.35, 0.85], gap="large")
+    with hero_left:
+        with st.container(border=True):
+            st.caption("首页设计基线")
+            st.markdown("# 黑土区水蚀智能预测与证据化评估平台")
+            st.markdown("面向黑土区水蚀过程认知、因子解释与空间表达的科研分析平台。")
+            chip_cols = st.columns(3)
+            chip_cols[0].caption("黑土区")
+            chip_cols[1].caption("RUSLE 五因子")
+            chip_cols[2].caption("空间解释")
+            st.caption("首页只承担平台定位与领域认知，不承担建模说明、结果摘要或流程引导。")
+    with hero_right:
+        with st.container(border=True):
+            st.markdown("#### 研究认知框架")
+            st.metric("研究重点", "侵蚀风险识别")
+            st.caption("聚焦地形、降雨、覆盖与管理共同作用下的侵蚀差异。")
+            st.metric("因子体系", "R / K / LS / C / P")
+            st.caption("以五大因子组织平台视角、因子理解与后续模型解释。")
+
+    st.caption("\u9996\u9875\u53ea\u627f\u62c5\u5e73\u53f0\u5b9a\u4f4d\u4e0e\u9886\u57df\u8ba4\u77e5\uff0c\u4e0d\u627f\u62c5\u5efa\u6a21\u8bf4\u660e\u3001\u7ed3\u679c\u6458\u8981\u6216\u6d41\u7a0b\u5f15\u5bfc\u3002")
+    st.markdown("### \u7814\u7a76\u805a\u7126")
+    st.caption("\u9996\u9875\u7684\u4fe1\u606f\u5bc6\u5ea6\u6765\u81ea\u7814\u7a76\u8ba4\u77e5\u7ed3\u6784\uff0c\u800c\u4e0d\u662f\u64cd\u4f5c\u6a21\u5757\u5806\u53e0\u3002")
+    focus_cols = st.columns(3)
+    with focus_cols[0]:
+        with st.container(border=True):
+            st.caption("Focus 01")
+            st.markdown("#### 研究对象")
+            st.markdown("黑土区水蚀研究强调地形起伏、降雨侵蚀力、土地覆盖与耕作管理共同作用下的侵蚀响应，而不是单一因子的静态判断。")
+            st.caption("首页只说明研究对象，不提前解释操作流程。")
+    with focus_cols[1]:
+        with st.container(border=True):
+            st.caption("Focus 02")
+            st.markdown("#### 五因子体系")
+            st.markdown("R、K、LS、C、P 构成平台的核心认知框架，用于组织平台视角、因子理解与后续模型解释的一致口径。")
+            st.caption("首页呈现因子框架，不呈现建模参数、指标或运行细节。")
+    with focus_cols[2]:
+        with st.container(border=True):
+            st.caption("Focus 03")
+            st.markdown("#### 空间表达")
+            st.markdown("科研意义不仅在于预测值本身，还在于识别空间异质性、高风险区域以及不同因子在空间上的主导作用范围。")
+            st.caption("真实图件与导出留在结果解释和预测导出模块。")
+    with st.expander("\u5c55\u5f00\u6c34\u8680\u7814\u7a76\u80cc\u666f\u8bf4\u660e", expanded=False):
+        st.markdown(
+            "\n".join([
+                "- \u9ed1\u571f\u533a\u6c34\u8680\u5177\u6709\u660e\u663e\u7684\u5730\u5f62\u5dee\u5f02\u3001\u65f6\u5e8f\u53d8\u5316\u548c\u7a7a\u95f4\u5f02\u8d28\u6027\u3002",
+                "- \u7814\u7a76\u91cd\u70b9\u901a\u5e38\u5305\u62ec\u4fb5\u8680\u5f3a\u5ea6\u8bc6\u522b\u3001\u4e3b\u5bfc\u56e0\u5b50\u89e3\u91ca\u4ee5\u53ca\u9ad8\u98ce\u9669\u533a\u57df\u8868\u8fbe\u3002",
+                "- \u9762\u5411\u79d1\u7814\u5e94\u7528\u7684\u7ed3\u679c\u9700\u8981\u517c\u987e\u7a7a\u95f4\u53ef\u8bfb\u6027\u3001\u89e3\u91ca\u53ef\u4fe1\u5ea6\u548c\u540e\u7eed\u590d\u7528\u3002",
+            ])
+        )
+    return
+
+    st.markdown(
         """
         <div class="home-hero">
           <div class="home-hero-card">
