@@ -2049,9 +2049,11 @@ def render_home():
     with hero_right:
         with st.container(border=True):
             st.markdown("#### 研究认知框架")
-            st.metric("研究重点", "侵蚀风险识别")
+            st.caption("研究重点")
+            st.markdown("### 侵蚀风险识别")
             st.caption("聚焦地形、降雨、覆盖与管理共同作用下的侵蚀差异。")
-            st.metric("因子体系", "R / K / LS / C / P")
+            st.caption("因子体系")
+            st.markdown("### R / K / LS / C / P")
             st.caption("以五大因子组织平台视角、因子理解与后续模型解释。")
 
     st.caption("\u9996\u9875\u53ea\u627f\u62c5\u5e73\u53f0\u5b9a\u4f4d\u4e0e\u9886\u57df\u8ba4\u77e5\uff0c\u4e0d\u627f\u62c5\u5efa\u6a21\u8bf4\u660e\u3001\u7ed3\u679c\u6458\u8981\u6216\u6d41\u7a0b\u5f15\u5bfc\u3002")
