@@ -1,0 +1,24 @@
+﻿[llm]
+backend = "openai"
+local_model_path = ""
+openai_model = "gpt-5.5"
+openai_timeout_seconds = 6
+openai_max_output_tokens = 700
+data_security_mode = "research_sensitive"
+allow_external_llm = false
+assistant_context_policy = "metadata_only"
+data_retention_days = 30
+device = "auto"
+dtype = "auto"
+max_new_tokens = 512
+temperature = 0.3
+
+[context]
+max_history_rounds = 20
+summary_max_lines = 20
+
+[training]
+optuna_trials = 30
+cv_folds = 5
+target_resolution_km = 5
+default_algorithms = ["lightgbm", "xgboost", "random_forest"]

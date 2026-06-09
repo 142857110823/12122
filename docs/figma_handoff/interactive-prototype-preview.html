@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EvidencePlatform Figma Handoff Interactive Prototype Preview</title>
+  <style>
+    :root {
+      --color-primary: #1a6b5a;
+      --color-primary-light: #2d8f7a;
+      --color-primary-dark: #0f4d3f;
+      --color-secondary: #b8956a;
+      --color-accent: #e07b39;
+      --color-bg: #f8f6f0;
+      --color-surface: #ffffff;
+      --color-text: #2d2d2d;
+      --color-text-muted: #6b6b6b;
+      --color-border: #e0ded8;
+      --color-success: #27ae60;
+      --color-warning: #e07b39;
+      --color-danger: #c0392b;
+      --shadow-lg: 0 24px 70px rgba(15, 77, 63, 0.18);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --radius-lg: 26px;
+      --radius-md: 14px;
+      --radius-sm: 8px;
+      --font-sans: "Microsoft YaHei UI", "Noto Sans CJK SC", "Segoe UI", sans-serif;
+      --font-mono: "Cascadia Mono", "JetBrains Mono", Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      color: var(--color-text);
+      background:
+        radial-gradient(circle at 10% 4%, rgba(224,123,57,0.16), transparent 26%),
+        radial-gradient(circle at 90% 2%, rgba(26,107,90,0.18), transparent 32%),
+        linear-gradient(180deg, #fbf8ef 0%, #f4efe4 58%, #f8f6f0 100%);
+    }
+
+    .shell {
+      width: min(1360px, calc(100vw - 32px));
+      margin: 28px auto 64px;
+    }
+
+    .notice {
+      display: grid;
+      gap: 8px;
+      padding: 14px 16px;
+      border: 1px solid rgba(192,57,43,0.24);
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.74);
+      box-shadow: var(--shadow-md);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .notice strong { color: var(--color-danger); }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      margin-top: 18px;
+      padding: clamp(26px, 4vw, 54px);
+      min-height: 360px;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(135deg, rgba(15,77,63,0.94), rgba(26,107,90,0.90)),
+        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: auto, 36px 36px, 36px 36px;
+      color: white;
+      box-shadow: var(--shadow-lg);
+      animation: heroReveal 520ms ease-out both;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -120px;
+      top: -120px;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(224,123,57,0.42), transparent 66%);
+    }
+
+    .kicker {
+      margin: 0 0 14px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: rgba(255,255,255,0.72);
+    }
+
+    h1 {
+      max-width: 920px;
+      margin: 0;
+      font-size: clamp(36px, 6vw, 74px);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 22px;
+      align-items: end;
+      margin-top: 34px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      margin: 0;
+      color: rgba(255,255,255,0.82);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .telemetry {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .telemetry-card {
+      padding: 14px;
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(12px);
+    }
+
+    .telemetry-card span {
+      display: block;
+      color: rgba(255,255,255,0.64);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .telemetry-card b {
+      display: block;
+      margin-top: 7px;
+      font-family: var(--font-mono);
+      font-size: 17px;
+    }
+
+    .section {
+      margin-top: 24px;
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.80);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-md);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--color-text-muted);
+      font-size: 12px;
+      text-align: right;
+    }
+
+    .stage-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .stage-card {
+      position: relative;
+      min-height: 160px;
+      padding: 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      background: linear-gradient(180deg, #fff, #fbf8ef);
+      transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .stage-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .stage-code {
+      display: inline-flex;
+      width: 42px;
+      height: 42px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 13px;
+      background: rgba(26,107,90,0.10);
+      color: var(--color-primary);
+      font-family: var(--font-mono);
+      font-weight: 800;
+    }
+
+    .stage-card h3 {
+      margin: 16px 0 8px;
+      font-size: 16px;
+    }
+
+    .stage-card p {
+      margin: 0;
+      color: var(--color-text-muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .flow-grid {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.95fr) minmax(320px, 1.05fr);
+      gap: 18px;
+    }
+
+    .screen-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .screen-chip {
+      display: grid;
+      gap: 5px;
+      padding: 13px 14px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      background: #fff;
+      cursor: pointer;
+      transition: transform 180ms ease-out, border-color 180ms ease-out, background 180ms ease-out;
+    }
+
+    .screen-chip:hover,
+    .screen-chip.active {
+      transform: translateY(-1px);
+      border-color: rgba(26,107,90,0.42);
+      background: rgba(26,107,90,0.05);
+    }
+
+    .screen-chip b {
+      font-size: 13px;
+    }
+
+    .screen-chip span {
+      color: var(--color-text-muted);
+      font-size: 12px;
+    }
+
+    .screen-detail {
+      min-height: 420px;
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at top right, rgba(224,123,57,0.14), transparent 32%),
+        #fff;
+      border: 1px solid var(--color-border);
+    }
+
+    .screen-detail h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      letter-spacing: -0.035em;
+    }
+
+    .screen-detail .condition {
+      color: var(--color-text-muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .component-tags,
+    .action-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin: 18px 0;
+    }
+
+    .tag,
+    .action-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      border: 1px solid var(--color-border);
+      background: #faf8f1;
+    }
+
+    .action-pill {
+      gap: 8px;
+      font-family: var(--font-mono);
+      background: rgba(26,107,90,0.06);
+      border-color: rgba(26,107,90,0.24);
+    }
+
+    .states-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .gate-state {
+      min-height: 132px;
+      padding: 14px;
+      border-radius: var(--radius-md);
+      border: 2px solid var(--color-border);
+      background: #fff;
+    }
+
+    .gate-state b {
+      display: block;
+      margin-bottom: 8px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+
+    .gate-state p {
+      margin: 0;
+      color: var(--color-text-muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .pass { border-color: rgba(39,174,96,0.45); }
+    .risk { border-color: rgba(224,123,57,0.65); animation: riskPulse 1400ms ease-in-out infinite; }
+    .block { border-color: rgba(192,57,43,0.62); }
+    .ready { border-color: rgba(26,107,90,0.45); }
+
+    .handoff-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .handoff-card {
+      padding: 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      background: #fff;
+    }
+
+    .handoff-card h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .handoff-card p,
+    .handoff-card li {
+      color: var(--color-text-muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    code {
+      font-family: var(--font-mono);
+      color: var(--color-primary-dark);
+      background: rgba(26,107,90,0.08);
+      border-radius: 6px;
+      padding: 2px 5px;
+    }
+
+    @keyframes heroReveal {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes riskPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(224,123,57,0.00); }
+      50% { box-shadow: 0 0 0 5px rgba(224,123,57,0.12); }
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .flow-grid,
+      .handoff-grid {
+        grid-template-columns: 1fr;
+      }
+      .stage-grid,
+      .states-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .section-title {
+        display: grid;
+      }
+      .section-title p {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .shell { width: min(100vw - 18px, 520px); margin-top: 10px; }
+      .hero { padding: 24px; border-radius: 18px; }
+      .telemetry,
+      .stage-grid,
+      .states-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="notice" aria-label="Claim boundary">
+      <div><strong>Boundary:</strong> This is a static Figma handoff preview, not a second frontend, not a native .fig file, and not a scientific/model validation artifact.</div>
+      <div>Every action label below maps to real `app.py` / `tools.py` workflow actions. No button here executes computation or pretends to pass a gate.</div>
+    </section>
+
+    <section class="hero">
+      <p class="kicker">Black Soil Water Erosion Intelligent Prediction and Evidence-Based Evaluation Platform / Figma Handoff Preview</p>
+      <h1>P0-P3 evidence-first soil erosion workflow, rebuilt as a design-system prototype.</h1>
+      <div class="hero-grid">
+        <p class="hero-copy">Use this page to inspect hierarchy, responsive intent, motion constraints, gate semantics, and developer handoff logic before running the Figma Desktop rebuild plugin. It mirrors the source-of-truth Streamlit workflow without creating a competing application shell.</p>
+        <div class="telemetry" aria-label="Prototype telemetry">
+          <div class="telemetry-card"><span>Source</span><b>app.py</b></div>
+          <div class="telemetry-card"><span>Tools</span><b>tools.py</b></div>
+          <div class="telemetry-card"><span>Native Figma</span><b>R8 pending</b></div>
+          <div class="telemetry-card"><span>Gate states</span><b>PASS/RISK/BLOCK</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <h2>Responsive P0-P3 Stage Architecture</h2>
+        <p>Desktop four-column rail, tablet two-column stack, mobile single-column command flow.</p>
+      </div>
+      <div class="stage-grid">
+        <article class="stage-card"><span class="stage-code">P0</span><h3>Run Context + Data Gate</h3><p>Manifest, raw source index, preprocessing audit, and read-only source boundary.</p></article>
+        <article class="stage-card"><span class="stage-code">P1</span><h3>Model Ranking</h3><p>MAE/RMSE/R2/NRMSE/PBIAS/train_seconds with optional dependency skips recorded.</p></article>
+        <article class="stage-card"><span class="stage-code">P2</span><h3>Explanation Workbench</h3><p>SHAP, dependence, interaction heatmap, dominant factor map, cluster map, radar chart.</p></article>
+        <article class="stage-card"><span class="stage-code">P3</span><h3>Evidence Bundle</h3><p>Report, method note, reproduction note, gate summary, and downloadable handoff package.</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <h2>Interactive Prototype Map</h2>
+        <p>Click a screen state to inspect its real action bindings and transition target.</p>
+      </div>
+      <div class="flow-grid">
+        <nav class="screen-list" aria-label="Prototype screens">
+          <button class="screen-chip active" data-screen="0"><b>S0_IDLE</b><span>Welcome / No Data</span></button>
+          <button class="screen-chip" data-screen="1"><b>S1_DATA_LOADED</b><span>P0 Data Loaded</span></button>
+          <button class="screen-chip" data-screen="2"><b>S2_QUALITY</b><span>P0 Quality Gate</span></button>
+          <button class="screen-chip" data-screen="3"><b>S3_FEATURES</b><span>P1 Feature Matrix Ready</span></button>
+          <button class="screen-chip" data-screen="4"><b>S4_MODELS</b><span>P1 Model Ranking</span></button>
+          <button class="screen-chip" data-screen="5"><b>S5_EXPLAINED</b><span>P2 Explanation And Spatial Artifacts</span></button>
+          <button class="screen-chip" data-screen="6"><b>S6_PREDICTED</b><span>P3 Prediction / Spatial View</span></button>
+          <button class="screen-chip" data-screen="7"><b>S7_BUNDLE</b><span>P3 Report And Evidence Bundle</span></button>
+        </nav>
+        <article class="screen-detail" aria-live="polite">
+          <h3 id="screen-name">Welcome / No Data</h3>
+          <p id="screen-condition" class="condition">Entry condition: uploads empty and messages empty.</p>
+          <div id="screen-components" class="component-tags"></div>
+          <div id="screen-actions" class="action-list"></div>
+          <p class="condition"><strong>Risk rule:</strong> If a tool returns <code>BLOCK</code> or <code>status=error</code>, the prototype must not advance. It must show blockers and evidence paths instead.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <h2>GateCard State System</h2>
+        <p>PASS_WITH_RISKS and BLOCK remain visually explicit; motion must not imply fake progress.</p>
+      </div>
+      <div class="states-grid">
+        <article class="gate-state"><b>PENDING</b><p>Neutral state. The stage has no evidence yet.</p></article>
+        <article class="gate-state ready"><b>READY</b><p>Inputs appear ready, but official gate JSON may still be absent.</p></article>
+        <article class="gate-state pass"><b>PASS</b><p>Gate evidence passed for the scoped check.</p></article>
+        <article class="gate-state risk"><b>PASS_WITH_RISKS</b><p>Risk is visible and pulsed. This is not full validation.</p></article>
+        <article class="gate-state block"><b>BLOCK</b><p>Downstream transition is forbidden until the blocker is resolved.</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <h2>Developer + Figma Handoff Contract</h2>
+        <p>Designed for direct implementation review while keeping native Figma completion unclaimed.</p>
+      </div>
+      <div class="handoff-grid">
+        <article class="handoff-card">
+          <h3>Design System</h3>
+          <p>Tokens: <code>design-tokens.json</code>. Component spec: <code>component-library.json</code>. Source UI: <code>app.py</code>.</p>
+        </article>
+        <article class="handoff-card">
+          <h3>Prototype Wiring</h3>
+          <p>Map: <code>prototype-map.json</code>. Real tools: <code>run_one_click_pipeline</code>, <code>generate_explanations</code>, <code>export_evidence_bundle</code>.</p>
+        </article>
+        <article class="handoff-card">
+          <h3>Native Completion Gate</h3>
+          <p>Run <code>figma_plugin/manifest.json</code> in Figma Desktop, inspect all required pages, then register a .fig/.figjam artifact or verified URL.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const screens = [
+      {
+        name: "Welcome / No Data",
+        condition: "uploads empty and messages empty",
+        components: ["welcome-msg", "sidebar uploader"],
+        actions: ["upload files -> S1_DATA_LOADED"]
+      },
+      {
+        name: "P0 Data Loaded",
+        condition: "workflow_stage=data_loaded",
+        components: ["CommandHero", "StageRail P0 active", "OptionAction", "GateWorkbench"],
+        actions: ["run_one_click_pipeline -> tools.run_one_click_pipeline -> S6_REPORTED", "assess_quality -> tools.assess_data_quality -> S2_QUALITY"]
+      },
+      {
+        name: "P0 Quality Gate",
+        condition: "workflow_stage=quality_assessed",
+        components: ["gate message", "quality report expander", "OptionAction", "GateWorkbench"],
+        actions: ["build_features -> tools.build_feature_table -> S3_FEATURES"]
+      },
+      {
+        name: "P1 Feature Matrix Ready",
+        condition: "workflow_stage=features_built",
+        components: ["feature table result", "OptionAction", "GateWorkbench"],
+        actions: ["train_models -> tools.train_candidates + tools.select_best -> S4_MODELS"]
+      },
+      {
+        name: "P1 Model Ranking",
+        condition: "workflow_stage=models_trained or models_optimized",
+        components: ["model ranking table", "best model", "ResultWorkbench", "GateWorkbench"],
+        actions: ["generate_explanations -> tools.generate_explanations -> S5_EXPLAINED", "predict -> tools.predict_future -> S6_PREDICTED"]
+      },
+      {
+        name: "P2 Explanation And Spatial Artifacts",
+        condition: "workflow_stage=explained",
+        components: ["explanation counts", "GeoShapley status", "evidence paths", "ResultWorkbench"],
+        actions: ["predict -> tools.predict_future -> S6_PREDICTED", "export_bundle -> tools.export_evidence_bundle -> S7_BUNDLE"]
+      },
+      {
+        name: "P3 Prediction / Spatial View",
+        condition: "workflow_stage=predicted or visualized",
+        components: ["map", "uncertainty option", "report option", "GateWorkbench"],
+        actions: ["generate_report -> tools.export_results -> S7_BUNDLE"]
+      },
+      {
+        name: "P3 Report And Evidence Bundle",
+        condition: "workflow_stage=reported",
+        components: ["report download", "bundle download", "evidence paths", "ResultWorkbench"],
+        actions: ["restart -> S0_IDLE"]
+      }
+    ];
+
+    const nameEl = document.getElementById("screen-name");
+    const conditionEl = document.getElementById("screen-condition");
+    const componentsEl = document.getElementById("screen-components");
+    const actionsEl = document.getElementById("screen-actions");
+
+    function renderScreen(index) {
+      const screen = screens[index];
+      nameEl.textContent = screen.name;
+      conditionEl.textContent = "Entry condition: " + screen.condition + ".";
+      componentsEl.innerHTML = screen.components.map(item => `<span class="tag">${item}</span>`).join("");
+      actionsEl.innerHTML = screen.actions.map(item => `<span class="action-pill">${item}</span>`).join("");
+      document.querySelectorAll(".screen-chip").forEach((chip, chipIndex) => {
+        chip.classList.toggle("active", chipIndex === index);
+      });
+    }
+
+    document.querySelectorAll(".screen-chip").forEach((chip) => {
+      chip.addEventListener("click", () => renderScreen(Number(chip.dataset.screen)));
+    });
+    renderScreen(0);
+  </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "name": "Interaction State Matrix",
+    "source": "app.py CSS + handle_action status behavior",
+    "purpose": "Figma state variants and implementation expectations."
+  },
+  "states": [
+    {
+      "component": "Primary workflow button",
+      "variants": {
+        "default": "white surface, dark text, subtle border",
+        "hover": "primary green background, white text, translateY(-1px), md shadow",
+        "running": "Streamlit st.status panel with explicit tool label",
+        "success": "assistant message with OK tool expander and evidence paths",
+        "error": "assistant message with error expander and suggested action"
+      }
+    },
+    {
+      "component": "GateCard",
+      "variants": {
+        "PENDING": "neutral border, gray badge",
+        "READY": "primary green edge, cyan-green badge",
+        "PASS": "success green edge and badge",
+        "PASS_WITH_RISKS": "amber edge and badge; risk remains visible",
+        "BLOCK": "red edge and badge; next-stage transition forbidden"
+      }
+    },
+    {
+      "component": "StageTile",
+      "variants": {
+        "default": "soil-white card",
+        "active": "primary/amber gradient with inset emphasis",
+        "hover": "translateY(-2px) and elevated shadow"
+      }
+    },
+    {
+      "component": "EvidenceItem",
+      "variants": {
+        "default": "soil panel row with mono value",
+        "risk": "must preserve PASS_WITH_RISKS text",
+        "block": "must point to blocking report or tool message"
+      }
+    },
+    {
+      "component": "DownloadButton",
+      "variants": {
+        "available": "rendered only when report/bundle file exists",
+        "unavailable": "not rendered; do not show fake disabled download"
+      }
+    }
+  ],
+  "transition_rules": [
+    "A successful visual state cannot be shown before the corresponding tool returns status=ok.",
+    "A stage card active state is orientation, not scientific proof.",
+    "When status=error or gate=BLOCK, keep the user in the current stage and show the blocker.",
+    "Micro-interactions may clarify affordance but must not imply computation progress."
+  ],
+  "motion_specs": [
+    {
+      "name": "Hero Reveal",
+      "timing": "520ms ease-out",
+      "purpose": "Reveal evidence platform context on first paint without implying computation."
+    },
+    {
+      "name": "Panel Lift",
+      "timing": "250ms cubic-bezier(0.4, 0, 0.2, 1)",
+      "purpose": "Show hover affordance for cards and real workflow actions."
+    },
+    {
+      "name": "Button Pressed",
+      "timing": "120ms ease-out",
+      "purpose": "Confirm pointer activation without changing gate status."
+    },
+    {
+      "name": "Focus Ring",
+      "timing": "instant + persistent",
+      "purpose": "Keep keyboard navigation visible on workflow actions."
+    },
+    {
+      "name": "Loading Sweep",
+      "timing": "900ms linear loop",
+      "purpose": "Allowed only while a real app.py/tools.py action is executing."
+    },
+    {
+      "name": "PASS_WITH_RISKS Pulse",
+      "timing": "1400ms subtle pulse",
+      "purpose": "Keep risk caveats visible without implying full success."
+    },
+    {
+      "name": "BLOCK Shake",
+      "timing": "180ms x-axis shake",
+      "purpose": "Signal downstream navigation is forbidden after a blocking gate."
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "meta": {
+    "name": "P0-P3 Interactive Prototype Map",
+    "source": "app.py::get_options / app.py::handle_action",
+    "prototype_type": "developer-executable Streamlit flow + Figma reconstruction map"
+  },
+  "screens": [
+    {
+      "id": "S0_IDLE",
+      "name": "Welcome / No Data",
+      "entry_condition": "uploads empty and messages empty",
+      "primary_ui": [
+        "welcome-msg",
+        "sidebar uploader"
+      ],
+      "next": [
+        {
+          "action": "upload files",
+          "target": "S1_DATA_LOADED"
+        }
+      ]
+    },
+    {
+      "id": "S1_DATA_LOADED",
+      "name": "P0 Data Loaded",
+      "entry_condition": "workflow_stage=data_loaded",
+      "primary_ui": [
+        "CommandHero",
+        "StageRail P0 active",
+        "OptionAction: run_one_click_pipeline",
+        "OptionAction: assess_quality",
+        "GateWorkbench"
+      ],
+      "next": [
+        {
+          "action": "run_one_click_pipeline",
+          "tool": "run_one_click_pipeline",
+          "target": "S6_REPORTED"
+        },
+        {
+          "action": "assess_quality",
+          "tool": "assess_data_quality",
+          "target": "S2_QUALITY"
+        }
+      ]
+    },
+    {
+      "id": "S2_QUALITY",
+      "name": "P0 Quality Gate",
+      "entry_condition": "workflow_stage=quality_assessed",
+      "primary_ui": [
+        "gate message",
+        "quality report expander",
+        "OptionAction: build_features",
+        "GateWorkbench"
+      ],
+      "next": [
+        {
+          "action": "build_features",
+          "tool": "build_feature_table",
+          "target": "S3_FEATURES"
+        }
+      ]
+    },
+    {
+      "id": "S3_FEATURES",
+      "name": "P1 Feature Matrix Ready",
+      "entry_condition": "workflow_stage=features_built",
+      "primary_ui": [
+        "feature table result",
+        "OptionAction: train_models",
+        "GateWorkbench"
+      ],
+      "next": [
+        {
+          "action": "train_models",
+          "tool": "train_candidates + select_best",
+          "target": "S4_MODELS"
+        }
+      ]
+    },
+    {
+      "id": "S4_MODELS",
+      "name": "P1 Model Ranking",
+      "entry_condition": "workflow_stage=models_trained or models_optimized",
+      "primary_ui": [
+        "model ranking table",
+        "best model",
+        "OptionAction: generate_explanations",
+        "OptionAction: predict",
+        "ResultWorkbench",
+        "GateWorkbench"
+      ],
+      "next": [
+        {
+          "action": "generate_explanations",
+          "tool": "generate_explanations",
+          "target": "S5_EXPLAINED"
+        },
+        {
+          "action": "predict",
+          "tool": "predict_future",
+          "target": "S6_PREDICTED"
+        }
+      ]
+    },
+    {
+      "id": "S5_EXPLAINED",
+      "name": "P2 Explanation And Spatial Artifacts",
+      "entry_condition": "workflow_stage=explained",
+      "primary_ui": [
+        "explanation counts",
+        "GeoShapley status",
+        "evidence paths",
+        "OptionAction: export_bundle",
+        "ResultWorkbench",
+        "GateWorkbench"
+      ],
+      "next": [
+        {
+          "action": "predict",
+          "tool": "predict_future",
+          "target": "S6_PREDICTED"
+        },
+        {
+          "action": "export_bundle",
+          "tool": "export_evidence_bundle",
+          "target": "S7_BUNDLE"
+        }
+      ]
+    },
+    {
+      "id": "S6_PREDICTED",
+      "name": "P3 Prediction / Spatial View",
+      "entry_condition": "workflow_stage=predicted or visualized",
+      "primary_ui": [
+        "map",
+        "uncertainty option",
+        "report option",
+        "GateWorkbench"
+      ],
+      "next": [
+        {
+          "action": "generate_report",
+          "tool": "export_results",
+          "target": "S7_BUNDLE"
+        }
+      ]
+    },
+    {
+      "id": "S7_BUNDLE",
+      "name": "P3 Report And Evidence Bundle",
+      "entry_condition": "workflow_stage=reported",
+      "primary_ui": [
+        "report download",
+        "bundle download",
+        "evidence paths",
+        "ResultWorkbench",
+        "GateWorkbench"
+      ],
+      "next": [
+        {
+          "action": "restart",
+          "target": "S0_IDLE"
+        }
+      ]
+    }
+  ],
+  "risk_rule": "If a tool returns BLOCK or status=error, do not advance to the next target screen; show blockers and evidence path if available.",
+  "result_workbench_rule": "ResultWorkbench may show empty states, but must only render metrics, previews, downloads, and gate JSON from real session state or existing files."
+}

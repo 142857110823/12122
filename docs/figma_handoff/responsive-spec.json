@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "name": "Responsive Frame Specification",
+    "source": "app.py CUSTOM_CSS media queries",
+    "purpose": "Figma frame and implementation rules for desktop, tablet, and mobile adaptations."
+  },
+  "frames": [
+    {
+      "name": "Desktop Evidence Platform",
+      "width": 1440,
+      "height": 1080,
+      "breakpoint": ">900px",
+      "layout": {
+        "sidebar": "320-360px fixed Streamlit sidebar",
+        "command_grid": "2 columns: 1.35fr / 0.85fr",
+        "stage_rail": "4 columns",
+        "metric_ribbon": "4 columns",
+        "gate_board": "4 columns",
+        "design_system_strip": "3 columns"
+      }
+    },
+    {
+      "name": "Tablet Evidence Platform",
+      "width": 834,
+      "height": 1194,
+      "breakpoint": "<=900px",
+      "layout": {
+        "sidebar": "280-330px when expanded",
+        "command_grid": "1 column",
+        "stage_rail": "2 columns",
+        "metric_ribbon": "2 columns",
+        "gate_board": "2 columns",
+        "design_system_strip": "1 column"
+      }
+    },
+    {
+      "name": "Mobile Evidence Platform",
+      "width": 390,
+      "height": 844,
+      "breakpoint": "<=560px",
+      "layout": {
+        "sidebar": "Streamlit collapsed/overlay behavior",
+        "command_grid": "1 column",
+        "hero": "20px 18px padding, 32px title",
+        "stage_rail": "1 column",
+        "metric_ribbon": "1 column",
+        "gate_board": "1 column",
+        "progress_steps": "horizontal scroll if overflow"
+      }
+    }
+  ],
+  "implementation_contract": [
+    "Do not introduce device-specific fake pages.",
+    "Use CSS variables and media queries in app.py as the source of truth.",
+    "Keep gate and evidence status visible on every breakpoint.",
+    "Never hide BLOCK or PASS_WITH_RISKS for mobile simplification."
+  ]
+}

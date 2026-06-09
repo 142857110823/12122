@@ -1,0 +1,206 @@
+{
+  "meta": {
+    "name": "Black Soil Water Erosion Intelligent Prediction and Evidence-Based Evaluation Platform Component Library",
+    "source": "app.py",
+    "principle": "Components expose research state and gate evidence; decoration must clarify workflow or risk."
+  },
+  "components": [
+    {
+      "name": "CommandHero",
+      "implemented_in": "render_command_center + .command-hero",
+      "purpose": "Brand anchor and single-workflow promise.",
+      "slots": [
+        "kicker",
+        "title",
+        "workflow summary"
+      ],
+      "states": [
+        "default"
+      ],
+      "do": [
+        "Mention P0-P3 scientific chain",
+        "Use grid cue and deep soil/green gradient"
+      ],
+      "dont": [
+        "Claim full scientific validation",
+        "Add unrelated secondary tools"
+      ]
+    },
+    {
+      "name": "StageTile",
+      "implemented_in": "render_command_center + .stage-tile",
+      "purpose": "Show current P0-P3 workflow area.",
+      "slots": [
+        "stage code",
+        "stage title",
+        "stage description"
+      ],
+      "states": [
+        "default",
+        "active",
+        "hover"
+      ],
+      "do": [
+        "Use active only for current stage group",
+        "Keep labels short"
+      ],
+      "dont": [
+        "Use active state as proof of gate PASS"
+      ]
+    },
+    {
+      "name": "MetricChip",
+      "implemented_in": "render_command_center + .metric-chip",
+      "purpose": "Compact operational stats.",
+      "slots": [
+        "label",
+        "value"
+      ],
+      "states": [
+        "default"
+      ],
+      "do": [
+        "Use for counts/model/run-level summaries"
+      ],
+      "dont": [
+        "Use for unsupported scientific conclusions"
+      ]
+    },
+    {
+      "name": "EvidenceItem",
+      "implemented_in": "render_command_center + .evidence-item",
+      "purpose": "Expose run lineage and gate state.",
+      "slots": [
+        "label",
+        "value"
+      ],
+      "states": [
+        "default",
+        "risk",
+        "block via message expander"
+      ],
+      "do": [
+        "Show Run ID and gate verdict",
+        "Keep PASS_WITH_RISKS visible"
+      ],
+      "dont": [
+        "Hide blockers inside decorative UI"
+      ]
+    },
+    {
+      "name": "DesignSystemStrip",
+      "implemented_in": "render_design_system_panel + .design-system-strip",
+      "purpose": "Embedded developer/Figma handoff summary.",
+      "slots": [
+        "design language",
+        "interaction prototype",
+        "handoff path"
+      ],
+      "states": [
+        "default",
+        "responsive stacked"
+      ],
+      "do": [
+        "Link to design assets",
+        "State real-tool constraints"
+      ],
+      "dont": [
+        "Pretend to execute computation"
+      ]
+    },
+    {
+      "name": "OptionAction",
+      "implemented_in": "get_options + render_option_cards + handle_action",
+      "purpose": "Stage-specific action bound to real workflow behavior.",
+      "slots": [
+        "title",
+        "description",
+        "action key"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "clicked/running via st.status"
+      ],
+      "do": [
+        "Map action to real tool or explicit navigation/reset",
+        "Describe outcome and risk"
+      ],
+      "dont": [
+        "Create unbound visual-only buttons"
+      ]
+    },
+    {
+      "name": "GateWorkbench",
+      "implemented_in": "render_gate_workbench + .gate-board",
+      "purpose": "Summarize P0-P3 gate readiness from real session state without replacing error-corrector reports.",
+      "slots": [
+        "stage code",
+        "stage title",
+        "verdict badge",
+        "risk description",
+        "proof line"
+      ],
+      "states": [
+        "PENDING",
+        "READY",
+        "PASS",
+        "PASS_WITH_RISKS",
+        "BLOCK"
+      ],
+      "do": [
+        "Keep PASS_WITH_RISKS and BLOCK explicit",
+        "Use as navigation/status aid only"
+      ],
+      "dont": [
+        "Treat derived card state as official scientific gate proof"
+      ]
+    },
+    {
+      "name": "ResultWorkbench",
+      "implemented_in": "render_results_workbench + .result-workbench",
+      "purpose": "Product-grade stage result surface for model ranking, explanation artifacts, evidence bundles, and gate indexes.",
+      "slots": [
+        "model summary cards",
+        "gate verdict summary",
+        "empty state",
+        "artifact category summary",
+        "gate JSON preview",
+        "artifact preview",
+        "dataframe",
+        "rmse rank bars",
+        "download action",
+        "tagged image gallery",
+        "bundle entry cards",
+        "tab navigation"
+      ],
+      "states": [
+        "explanations available",
+        "bundle entries available",
+        "gate summary visible",
+        "gates available",
+        "artifact gallery visible",
+        "models available",
+        "empty",
+        "rank bars visible",
+        "bundle available"
+      ],
+      "do": [
+        "Use tabs to reduce chat-scroll dependency",
+        "Rank bars must be derived from real RMSE values",
+        "Render only real session/file artifacts",
+        "Artifact gallery must use existing image paths",
+        "Bundle entry cards must point to existing package files or show pending",
+        "Gate summary must parse existing gate JSON verdicts",
+        "Show empty states when artifacts are absent"
+      ],
+      "dont": [
+        "Count gates without reading existing JSON files",
+        "Show generated-looking thumbnails when files do not exist",
+        "Use decorative rank bars without metric backing",
+        "Show method/reproduce/gate/index entries as available before export",
+        "Invent model metrics, image previews, downloads, or gate reports"
+      ]
+    }
+  ]
+}

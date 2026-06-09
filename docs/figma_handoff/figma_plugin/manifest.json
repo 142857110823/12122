@@ -1,0 +1,11 @@
+{
+  "name": "Black Soil Water Erosion Intelligent Prediction and Evidence-Based Evaluation Platform Rebuild Kit",
+  "id": "black-soil-evidence-platform-rebuild-kit",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
+  "networkAccess": {
+    "allowedDomains": []
+  }
+}

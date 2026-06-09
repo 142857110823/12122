@@ -1,0 +1,726 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "prepare_run_context",
+      "description": "Initialize run context and evidence tree under data/runs/<run_id>.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "run_mode": {
+            "type": "string",
+            "enum": [
+              "quick",
+              "full"
+            ],
+            "description": "Workflow depth mode."
+          },
+          "source_mode": {
+            "type": "string",
+            "enum": [
+              "rusle_raw",
+              "uploads"
+            ],
+            "description": "Data source mode."
+          },
+          "output_dpi": {
+            "type": "integer",
+            "description": "Figure output DPI, default 300."
+          },
+          "run_id": {
+            "type": "string",
+            "description": "Optional external run id."
+          },
+          "cleanup_history": {
+            "type": "boolean",
+            "description": "Whether to cleanup old runs safely."
+          },
+          "max_keep_runs": {
+            "type": "integer",
+            "description": "Max run folders to keep when cleanup is enabled."
+          },
+          "source_dir": {
+            "type": "string",
+            "description": "Optional raw source directory override."
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "prepare_full_resource_preflight",
+      "description": "Metadata-only preflight for full-mode rusle_raw resource risk; writes full_resource_preflight.json.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "source_dir": {
+            "type": "string",
+            "description": "Optional raw source directory."
+          },
+          "target_resolution_km": {
+            "type": "number",
+            "description": "Target resolution in km for risk context."
+          },
+          "run_id": {
+            "type": "string",
+            "description": "Optional run id."
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "plan_full_execution",
+      "description": "Create a metadata-only, year-windowed full-mode execution plan without modifying raw source data.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "source_dir": {
+            "type": "string",
+            "description": "Optional raw source directory."
+          },
+          "target_resolution_km": {
+            "type": "number",
+            "description": "Target analysis resolution in kilometers."
+          },
+          "year_window_size": {
+            "type": "integer",
+            "description": "Number of years per full-mode execution batch."
+          },
+          "max_tile_pixels": {
+            "type": "integer",
+            "description": "Per-raster pixel threshold for high-risk batch labeling."
+          },
+          "run_id": {
+            "type": "string",
+            "description": "Optional run id."
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "run_full_batch_smoke",
+      "description": "Safety-gated dry-run or bounded smoke check for one planned full-mode batch. Default does not process rasters.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "plan_path": {
+            "type": "string",
+            "description": "Optional full_execution_plan.json path."
+          },
+          "batch_id": {
+            "type": "string",
+            "description": "Batch id from the full execution plan, e.g. full_batch_001."
+          },
+          "execute": {
+            "type": "boolean",
+            "description": "Whether to allow execution if metadata limits pass. Default false."
+          },
+          "max_source_size_gb": {
+            "type": "number",
+            "description": "Maximum estimated batch source size allowed for execution."
+          },
+          "max_pixels": {
+            "type": "integer",
+            "description": "Maximum raster pixel count allowed for execution."
+          },
+          "run_id": {
+            "type": "string",
+            "description": "Optional run id."
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "plan_full_spatial_tiles",
+      "description": "Create a metadata-only spatial tile plan for one planned full-mode batch.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "plan_path": {
+            "type": "string",
+            "description": "Optional full_execution_plan.json path."
+          },
+          "batch_id": {
+            "type": "string",
+            "description": "Batch id from the full execution plan."
+          },
+          "tile_width": {
+            "type": "integer",
+            "description": "Tile width in reference-raster pixels."
+          },
+          "tile_height": {
+            "type": "integer",
+            "description": "Tile height in reference-raster pixels."
+          },
+          "max_tile_pixels": {
+            "type": "integer",
+            "description": "Tile pixel threshold for high-risk labeling."
+          },
+          "run_id": {
+            "type": "string",
+            "description": "Optional run id."
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "run_full_tile_smoke",
+      "description": "Safety-gated dry-run or bounded smoke check for one spatial tile from a full batch plan.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "tile_plan_path": {
+            "type": "string",
+            "description": "Optional spatial tile plan path."
+          },
+          "tile_id": {
+            "type": "string",
+            "description": "Tile id from the spatial tile plan."
+          },
+          "execute": {
+            "type": "boolean",
+            "description": "Whether to allow execution if metadata limits pass. Default false."
+          },
+          "max_tile_source_size_gb": {
+            "type": "number",
+            "description": "Maximum estimated tile source size allowed for execution."
+          },
+          "max_tile_pixels": {
+            "type": "integer",
+            "description": "Maximum tile pixel count allowed for execution."
+          },
+          "run_id": {
+            "type": "string",
+            "description": "Optional run id."
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "run_full_tile_preprocess",
+      "description": "Read one bounded full-mode spatial tile window and build a tile-level feature table plus P0 gate evidence.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "plan_path": {
+            "type": "string"
+          },
+          "tile_plan_path": {
+            "type": "string"
+          },
+          "tile_id": {
+            "type": "string"
+          },
+          "year": {
+            "type": "string"
+          },
+          "max_tile_pixels": {
+            "type": "integer"
+          },
+          "max_records": {
+            "type": "integer"
+          },
+          "run_id": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "run_full_tile_coverage_probe",
+      "description": "Probe a bounded set of full-mode spatial tiles, execute tile preprocessing where safe, and write a coverage report with success/failure accounting.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "plan_path": {
+            "type": "string",
+            "description": "Optional full_execution_plan.json path."
+          },
+          "tile_plan_path": {
+            "type": "string",
+            "description": "Optional spatial tile plan path."
+          },
+          "tile_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Explicit tile ids to probe."
+          },
+          "tile_start_index": {
+            "type": "integer",
+            "description": "First tile index when tile_ids is omitted."
+          },
+          "tile_count": {
+            "type": "integer",
+            "description": "Number of strided tiles to probe when tile_ids is omitted."
+          },
+          "tile_stride": {
+            "type": "integer",
+            "description": "Tile index stride when tile_ids is omitted."
+          },
+          "year": {
+            "type": "string",
+            "description": "Target year inside the batch."
+          },
+          "max_tile_pixels": {
+            "type": "integer",
+            "description": "Maximum pixels per tile allowed for preprocessing."
+          },
+          "max_records_per_tile": {
+            "type": "integer",
+            "description": "Maximum sampled records to write per successful tile."
+          },
+          "max_probe_tiles": {
+            "type": "integer",
+            "description": "Hard cap on number of tiles per probe call."
+          },
+          "run_id": {
+            "type": "string",
+            "description": "Optional run id."
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "inspect_uploads",
+      "description": "Scan uploaded files and summarize variable/year/scenario coverage.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "assess_data_quality",
+      "description": "Assess data quality for RUSLE factors, readability, value ranges and coverage.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "build_feature_table",
+      "description": "Align rasters and build feature table with run evidence output.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "target_resolution_km": {
+            "type": "number",
+            "description": "Target grid resolution in km."
+          },
+          "run_mode": {
+            "type": "string",
+            "enum": [
+              "quick",
+              "full"
+            ]
+          },
+          "source_mode": {
+            "type": "string",
+            "enum": [
+              "rusle_raw",
+              "uploads"
+            ]
+          },
+          "output_dpi": {
+            "type": "integer"
+          },
+          "run_id": {
+            "type": "string"
+          },
+          "source_dir": {
+            "type": "string",
+            "description": "Optional raw source directory override."
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "train_candidates",
+      "description": "Train model candidates and output unified metrics (MAE/RMSE/R2/NRMSE/PBIAS/train_seconds).",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "algorithms": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "optuna_trials": {
+            "type": "integer"
+          },
+          "cv_folds": {
+            "type": "integer"
+          },
+          "run_mode": {
+            "type": "string",
+            "enum": [
+              "quick",
+              "full"
+            ]
+          },
+          "source_mode": {
+            "type": "string",
+            "enum": [
+              "rusle_raw",
+              "uploads"
+            ]
+          },
+          "output_dpi": {
+            "type": "integer"
+          },
+          "run_id": {
+            "type": "string"
+          },
+          "param_overrides": {
+            "type": "object",
+            "description": "Per-algorithm manual hyperparameter overrides, for example {\"random_forest\": {\"n_estimators\": 200}}."
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "run_stage_two_optimization",
+      "description": "Run stage-two Bayesian hyperparameter optimization for selected algorithms.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "algorithms": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cv_folds": {
+            "type": "integer"
+          },
+          "n_trials": {
+            "type": "integer"
+          },
+          "timeout_sec": {
+            "type": "integer"
+          },
+          "base_param_overrides": {
+            "type": "object",
+            "description": "Per-algorithm manual hyperparameter overrides used as the optimization baseline."
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "run_stage_three_retrain",
+      "description": "Retrain optimized models with stage-two best parameters and update model state.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "algorithms": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "optimization_results": {
+            "type": "object",
+            "description": "Explicit stage-two optimization results. If omitted, the tool reads state._optimization_result."
+          },
+          "base_param_overrides": {
+            "type": "object",
+            "description": "Per-algorithm manual hyperparameter overrides merged before optimized parameters."
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "optimize_hyperparams",
+      "description": "Run Optuna optimization for selected algorithms and update model registry.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "algorithms": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "target_col": {
+            "type": "string",
+            "description": "Compatibility field; this project expects the unified target column to be 'label'."
+          },
+          "n_folds": {
+            "type": "integer"
+          },
+          "n_trials": {
+            "type": "integer"
+          },
+          "timeout_sec": {
+            "type": "integer"
+          },
+          "base_param_overrides": {
+            "type": "object",
+            "description": "Per-algorithm manual hyperparameter overrides used as the optimization baseline."
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "select_best",
+      "description": "Select best model by metric and produce ranking/diagnostics.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "metric": {
+            "type": "string",
+            "description": "Selection metric: rmse/mae/r2."
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "predict_future",
+      "description": "Predict future erosion raster for a scenario.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "scenario": {
+            "type": "string",
+            "description": "Scenario id, e.g. ssp245."
+          }
+        },
+        "required": [
+          "scenario"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "visualize",
+      "description": "Render charts/maps for metrics, importance, scatter, map, uncertainty.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "target": {
+            "type": "string",
+            "enum": [
+              "map",
+              "metrics",
+              "importance",
+              "scatter",
+              "uncertainty"
+            ]
+          }
+        },
+        "required": [
+          "target"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "run_error_corrector",
+      "description": "Run local stage gate checker and return PASS/PASS_WITH_RISKS/BLOCK.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "stage": {
+            "type": "string",
+            "description": "Stage id like P0/P1/P2/P3."
+          },
+          "run_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "stage"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "error_corrector_report",
+      "description": "Compatibility alias for run_error_corrector; writes the same stage gate report.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "stage": {
+            "type": "string",
+            "description": "Stage id like P0/P1/P2/P3."
+          },
+          "run_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "stage"
+        ]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "generate_explanations",
+      "description": "Generate SHAP and spatial explanation artifacts and save to run evidence.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "output_dpi": {
+            "type": "integer",
+            "description": "Default 300."
+          },
+          "run_id": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "export_results",
+      "description": "Export markdown report and return best-model metrics including MAE/RMSE/R2/NRMSE/PBIAS/train_seconds.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "export_evidence_bundle",
+      "description": "Export complete run evidence bundle (zip + index/method/reproduce/gates).",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "run_id": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "run_one_click_pipeline",
+      "description": "One-click workflow P0-P3 with stage gates and evidence bundle export.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "run_mode": {
+            "type": "string",
+            "enum": [
+              "quick",
+              "full"
+            ]
+          },
+          "source_mode": {
+            "type": "string",
+            "enum": [
+              "rusle_raw",
+              "uploads"
+            ]
+          },
+          "output_dpi": {
+            "type": "integer"
+          },
+          "run_id": {
+            "type": "string"
+          },
+          "target_resolution_km": {
+            "type": "number"
+          },
+          "algorithms": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cleanup_history": {
+            "type": "boolean",
+            "description": "Whether to safely cleanup old data/runs folders before starting. Default false to preserve evidence."
+          },
+          "max_keep_runs": {
+            "type": "integer",
+            "description": "Max run folders to keep when cleanup_history is true."
+          }
+        },
+        "required": []
+      }
+    }
+  }
+]

@@ -1,0 +1,169 @@
+{
+  "schema": "evidence_platform.native_figma_inspection_checklist.v1",
+  "purpose": "Machine-readable inspection contract for the external native Figma source/prototype step.",
+  "claim_boundary": "This checklist is not native Figma evidence. It defines what must be inspected after the Figma Desktop plugin or Figma MCP creates a .fig/.figjam file or verified Figma URL.",
+  "required_pages": [
+    {
+      "name": "EvidencePlatform Tokens",
+      "required_markers": [
+        "Primary",
+        "Secondary",
+        "Accent",
+        "Success",
+        "Warning",
+        "Danger",
+        "Paint Style / EvidencePlatform/Primary",
+        "Paint Style / EvidencePlatform/Warning",
+        "Paint Style / EvidencePlatform/Danger",
+        "Text Style / EvidencePlatform/Display 44",
+        "Text Style / EvidencePlatform/Body 14",
+        "Effect Style / EvidencePlatform/Panel Lift",
+        "Variable Collection / EvidencePlatform Tokens",
+        "Variable / color/primary",
+        "Variable / color/warning",
+        "Variable / color/danger",
+        "Variable / color/surface",
+        "Variable / color/background"
+      ],
+      "pass_criteria": "Color tokens are visible as editable Figma nodes, native paint/text/effect styles and color variables exist when supported, and values match design-tokens.json."
+    },
+    {
+      "name": "EvidencePlatform Components",
+      "required_markers": [
+        "Master / CommandHero",
+        "Master / GateWorkbench",
+        "Master / ResultWorkbench",
+        "Master / OptionAction",
+        "GateCard / PASS",
+        "GateCard / PASS_WITH_RISKS",
+        "GateCard / BLOCK",
+        "Component Set / GateCard Verdicts",
+        "OptionAction / default",
+        "OptionAction / hover",
+        "OptionAction / running",
+        "OptionAction / disabled",
+        "OptionAction / blocked",
+        "Component Set / OptionAction States",
+        "combineAsVariants"
+      ],
+      "pass_criteria": "Component masters are editable; GateCard and OptionAction variants are available as component sets when supported; PASS_WITH_RISKS/BLOCK and real-tool action boundaries remain visible."
+    },
+    {
+      "name": "EvidencePlatform Design System Spec",
+      "required_markers": [
+        "Type Scale / Display 44",
+        "Spacing Scale / 8pt Grid",
+        "Color Role / PASS_WITH_RISKS Warning",
+        "Layout Rule / Responsive Shell"
+      ],
+      "pass_criteria": "Typography, spacing, color roles, and responsive shell rules are documented on-canvas."
+    },
+    {
+      "name": "EvidencePlatform Prototype",
+      "required_markers": [
+        "Desktop Evidence Platform",
+        "Tablet Evidence Platform",
+        "Mobile Evidence Platform",
+        "P0",
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "pass_criteria": "Desktop/tablet/mobile frames exist and the P0-P3 stage hierarchy is readable."
+    },
+    {
+      "name": "EvidencePlatform Interactive Flow",
+      "required_markers": [
+        "Prototype Edge / One-click P0-P3",
+        "Prototype Edge / Export evidence bundle",
+        "BLOCK edge rule",
+        "wirePrototype",
+        "source.reactions"
+      ],
+      "pass_criteria": "Prototype flow markers exist; if Figma reactions are supported, key actions are wired and BLOCK does not advance."
+    },
+    {
+      "name": "EvidencePlatform Motion System",
+      "required_markers": [
+        "Motion Spec / PASS_WITH_RISKS Pulse",
+        "Motion Spec / BLOCK Shake",
+        "Motion Rule / no fake progress"
+      ],
+      "pass_criteria": "Motion states explain risk and block behavior without implying fake computation or scientific validity."
+    },
+    {
+      "name": "EvidencePlatform Developer Handoff",
+      "required_markers": [
+        "Source of Truth / app.py and tools.py",
+        "Figma Save/Export Requirement",
+        "Registration Path / native-figma-receipt"
+      ],
+      "pass_criteria": "Handoff page states that app.py/tools.py remain the source of truth and no second frontend is introduced."
+    },
+    {
+      "name": "EvidencePlatform Acceptance Evidence",
+      "required_markers": [
+        "Acceptance Evidence",
+        "PASS_WITH_RISKS",
+        "BLOCK",
+        "native-figma-receipt"
+      ],
+      "pass_criteria": "Acceptance evidence page makes the remaining native save/export and receipt registration requirement explicit."
+    },
+    {
+      "name": "EvidencePlatform Native Inspection Checklist",
+      "required_markers": [
+        "evidence_platform.native_figma_inspection_checklist.v1",
+        "Required Pages",
+        "Prototype Checks",
+        "Motion Checks",
+        "Source-of-Truth Checks",
+        "Forbidden Claims Until Registered"
+      ],
+      "pass_criteria": "The native inspection checklist is visible on-canvas so reviewers can inspect the Figma file without switching back to JSON."
+    }
+  ],
+  "prototype_checks": [
+    "One-click P0-P3 flow edge exists",
+    "Export evidence bundle edge exists",
+    "BLOCK state prevents next-stage progression",
+    "PASS_WITH_RISKS remains visible",
+    "No action chip represents a workflow that is absent from app.py/tools.py"
+  ],
+  "motion_checks": [
+    "PASS_WITH_RISKS pulse is represented",
+    "BLOCK shake/error emphasis is represented",
+    "Loading animation is only described for real tool execution",
+    "No fake progress animation is introduced"
+  ],
+  "source_of_truth_checks": [
+    "Workflow actions map back to app.py/tools.py",
+    "No second frontend is introduced",
+    "Figma artifact does not claim scientific/model validity",
+    "Design handoff references docs/figma_handoff and docs/UI_DESIGN_SYSTEM.md"
+  ],
+  "registration_requirements": {
+    "script": "scripts/register_native_figma_artifact.py",
+    "accepted_sources": [
+      ".fig",
+      ".figjam",
+      "verified Figma design/prototype URL"
+    ],
+    "required_flags": [
+      "--verified-by",
+      "--confirm-pages",
+      "--confirm-interactions",
+      "--confirm-motion",
+      "--confirm-source-truth"
+    ],
+    "shortcut_flag": "--confirm-all",
+    "must_write": "docs/figma_handoff/native-figma-receipt.json",
+    "completion_status": "verified_native_figma_artifact"
+  },
+  "forbidden_claims_until_registered": [
+    "Native Figma source is complete",
+    "Figma prototype interactions were inspected",
+    "Pixel-perfect Figma parity is proven",
+    "UI evidence proves model or scientific validity"
+  ]
+}

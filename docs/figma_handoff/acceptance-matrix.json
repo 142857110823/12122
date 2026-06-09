@@ -1,0 +1,160 @@
+{
+  "meta": {
+    "name": "Figma Delivery Acceptance Matrix",
+    "source_objective": "Commercial-grade UI/Figma design delivery for the single Streamlit water erosion platform.",
+    "generated_for": "Goal3.0 completion audit",
+    "claim_boundary": "This matrix maps local evidence to objective requirements. It does not mark the goal complete while native Figma source/prototype remains unverified."
+  },
+  "statuses": {
+    "verified_local": "Requirement has repository/test/rendered evidence available locally.",
+    "partial_local": "Requirement has useful local evidence but still needs visual/manual review.",
+    "missing_external_fulfillment": "Requirement needs Figma Desktop/MCP execution or a native artifact outside the current local evidence."
+  },
+  "requirements": [
+    {
+      "id": "R1",
+      "requirement": "Create a brand-aligned design system with color, typography, radius, elevation, motion, and breakpoints.",
+      "status": "verified_local",
+      "evidence": [
+        "docs/UI_DESIGN_SYSTEM.md",
+        "docs/figma_handoff/design-tokens.json",
+        "docs/figma_handoff/figma_plugin/code.js::EvidencePlatform Tokens"
+      ],
+      "verification": [
+        "python -m unittest test_ui_design_assets.py",
+        "python scripts/figma_handoff_audit.py"
+      ],
+      "claim_allowed": "Repository handoff contains a tested design-system specification and Figma reconstruction path.",
+      "claim_forbidden": "Do not claim these tokens exist inside a saved native Figma file until the plugin is run and the file is saved."
+    },
+    {
+      "id": "R2",
+      "requirement": "Provide a component library and style guide for the evidence platform UI.",
+      "status": "verified_local",
+      "evidence": [
+        "docs/figma_handoff/component-library.json",
+        "docs/figma_handoff/figma_plugin/code.js::EvidencePlatform Components",
+        "docs/figma_handoff/figma_plugin/code.js::Master / CommandHero",
+        "docs/figma_handoff/figma_plugin/code.js::Master / GateWorkbench",
+        "docs/figma_handoff/figma_plugin/code.js::Master / ResultWorkbench"
+      ],
+      "verification": [
+        "python -m unittest test_ui_design_assets.py",
+        "python scripts/figma_handoff_audit.py"
+      ],
+      "claim_allowed": "Component inventory and Figma component-master reconstruction markers are present and tested.",
+      "claim_forbidden": "Do not claim published Figma component library availability before native Figma execution."
+    },
+    {
+      "id": "R3",
+      "requirement": "Design responsive interfaces for desktop, tablet, and mobile.",
+      "status": "verified_local",
+      "evidence": [
+        "docs/figma_handoff/responsive-spec.json",
+        "docs/figma_handoff/responsive-reference.svg",
+        "docs/figma_handoff/figma_plugin/code.js::Desktop Evidence Platform",
+        "docs/figma_handoff/figma_plugin/code.js::Tablet Evidence Platform",
+        "docs/figma_handoff/figma_plugin/code.js::Mobile Evidence Platform",
+        "data/runs/ui_visual_qa_20260602_172626/visual_qa_manifest.json"
+      ],
+      "verification": [
+        "python -m unittest test_ui_design_assets.py",
+        "python scripts/ui_visual_qa.py --port 8522 --timeout 90"
+      ],
+      "claim_allowed": "Responsive specs and latest rendered Streamlit screenshot QA exist for the three breakpoints.",
+      "claim_forbidden": "Do not claim pixel-perfect native Figma parity from Streamlit screenshots alone."
+    },
+    {
+      "id": "R4",
+      "requirement": "Produce a high-fidelity visual prototype with clear hierarchy and commercial-grade evidence platform direction.",
+      "status": "partial_local",
+      "evidence": [
+        "docs/figma_handoff/high-fidelity-evidence-platform.svg",
+        "docs/figma_handoff/responsive-reference.svg",
+        "data/runs/ui_visual_qa_20260602_172626/desktop_1440x1080.png",
+        "data/runs/ui_visual_qa_20260602_172626/tablet_834x1194.png",
+        "data/runs/ui_visual_qa_20260602_172626/mobile_390x844.png"
+      ],
+      "verification": [
+        "python scripts/ui_visual_qa.py --port 8522 --timeout 90"
+      ],
+      "claim_allowed": "Rendered Streamlit UI and SVG references provide a high-fidelity local visual baseline.",
+      "claim_forbidden": "Do not claim final pixel-perfect Figma source quality until the native file is visually inspected."
+    },
+    {
+      "id": "R5",
+      "requirement": "Create an interactive prototype with real workflow logic and no fake workflow buttons.",
+      "status": "partial_local",
+      "evidence": [
+        "docs/figma_handoff/prototype-map.json",
+        "docs/figma_handoff/interactive-prototype-preview.html",
+        "docs/figma_handoff/figma_plugin/code.js::EvidencePlatform Interactive Flow",
+        "docs/figma_handoff/figma_plugin/code.js::wirePrototype",
+        "docs/figma_handoff/figma_plugin/code.js::source.reactions",
+        "app.py::handle_action",
+        "tools.py::TOOL_MAP"
+      ],
+      "verification": [
+        "python -m unittest test_ui_design_assets.py",
+        "python -m unittest test_p0_p3_upgrade.py"
+      ],
+      "claim_allowed": "Prototype map, static interaction preview, and plugin reaction logic are present and tied to real app/tool actions.",
+      "claim_forbidden": "Do not claim Figma prototype interactions work until the plugin is executed and reactions are inspected in Figma."
+    },
+    {
+      "id": "R6",
+      "requirement": "Implement micro-interactions and motion design without implying fake progress or scientific validity.",
+      "status": "verified_local",
+      "evidence": [
+        "docs/figma_handoff/interaction-states.json::motion_specs",
+        "docs/figma_handoff/figma_plugin/code.js::EvidencePlatform Motion System",
+        "docs/figma_handoff/figma_plugin/code.js::Motion Rule / no fake progress"
+      ],
+      "verification": [
+        "python -m unittest test_ui_design_assets.py",
+        "python -m json.tool docs/figma_handoff/interaction-states.json"
+      ],
+      "claim_allowed": "Motion and microinteraction specifications are documented, tested, and included in the Figma reconstruction plugin.",
+      "claim_forbidden": "Do not claim native Figma animation behavior was inspected until the plugin is run in Figma."
+    },
+    {
+      "id": "R7",
+      "requirement": "Ensure design is developer-usable and remains tied to the single Streamlit app.",
+      "status": "verified_local",
+      "evidence": [
+        "app.py",
+        "docs/UI_DESIGN_SYSTEM.md",
+        "docs/figma_handoff/README.md",
+        "docs/figma_handoff/interactive-prototype-preview.html",
+        "docs/figma_handoff/accessibility-qa-checklist.md",
+        "scripts/build_figma_handoff_bundle.py"
+      ],
+      "verification": [
+        "python -m py_compile app.py tools.py scripts/ui_visual_qa.py scripts/figma_handoff_audit.py scripts/build_figma_handoff_bundle.py test_ui_design_assets.py test_p0_p3_upgrade.py",
+        "python -m unittest test_ui_design_assets.py"
+      ],
+      "claim_allowed": "Developer handoff files and bundle builder are locally verified.",
+      "claim_forbidden": "Do not treat the handoff ZIP as a second frontend or native Figma source."
+    },
+    {
+      "id": "R8",
+      "requirement": "Provide complete Figma source files and a verified Figma interactive prototype.",
+      "status": "missing_external_fulfillment",
+      "evidence": [
+        "data/runs/figma_handoff_audit_*/figma_handoff_audit.json::native_source.complete=false",
+        "data/runs/figma_handoff_bundle_*/figma_handoff_bundle_manifest.json::native_source.complete=false",
+        "docs/figma_handoff/native-figma-receipt.template.json",
+        "scripts/register_native_figma_artifact.py"
+      ],
+      "verification": [
+        "python scripts/figma_handoff_audit.py",
+        "python scripts/build_figma_handoff_bundle.py",
+        "python scripts/register_native_figma_artifact.py --url https://www.figma.com/design/FILEKEY/EvidencePlatform --verified-by auditor"
+      ],
+      "claim_allowed": "Native Figma completion is explicitly not proven by current local evidence.",
+      "claim_forbidden": "Do not mark the active goal complete until a .fig/.figjam artifact or verified Figma URL is produced and inspected."
+    }
+  ],
+  "overall_status": "partial_completion",
+  "next_required_external_action": "Run docs/figma_handoff/figma_plugin/manifest.json in Figma Desktop or a working Figma MCP, inspect generated pages/interactions/motion, then save/export a native .fig/.figjam artifact or register a verified Figma URL with scripts/register_native_figma_artifact.py."
+}

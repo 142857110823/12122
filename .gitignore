@@ -1,0 +1,42 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+venv/
+.venv/
+env/
+
+# Python caches and test artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Runtime data, model artifacts, and generated evidence
+data/
+catboost_info/
+outputs/
+
+# Browser/runtime caches
+.pw-browsers/
+
+# Logs and temporary runtime files
+*.log
+streamlit_stdout.log
+streamlit_stderr.log
+_latest_ui_test.log
+
+# Local historical notes and unrelated local folders
+workflow-log/
+Workflow-Logs/
+大学物理竞赛/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

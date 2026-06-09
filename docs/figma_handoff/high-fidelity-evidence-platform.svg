@@ -1,0 +1,110 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1080" viewBox="0 0 1440 1080" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fbf8ef"/>
+      <stop offset="0.54" stop-color="#f5f1e8"/>
+      <stop offset="1" stop-color="#f8f6f0"/>
+    </linearGradient>
+    <linearGradient id="hero" x1="300" y1="56" x2="1300" y2="262" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#102b27"/>
+      <stop offset="0.46" stop-color="#17493f"/>
+      <stop offset="1" stop-color="#0c1d1b"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="1440" height="1080" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="20" stdDeviation="28" flood-color="#102b27" flood-opacity="0.12"/>
+    </filter>
+    <pattern id="grid" width="34" height="34" patternUnits="userSpaceOnUse">
+      <path d="M34 0H0V34" stroke="white" stroke-opacity="0.07"/>
+    </pattern>
+  </defs>
+  <rect width="1440" height="1080" fill="url(#bg)"/>
+  <circle cx="118" cy="70" r="260" fill="#e07b39" opacity="0.10"/>
+  <circle cx="1320" cy="70" r="230" fill="#1a6b5a" opacity="0.12"/>
+
+  <rect x="0" y="0" width="340" height="1080" fill="#fffdf8" stroke="#e0ded8"/>
+  <text x="28" y="48" fill="#1a6b5a" font-family="Microsoft YaHei UI, Segoe UI, sans-serif" font-size="22" font-weight="800">黑土区水蚀智能预测与证据化评估平台</text>
+  <text x="28" y="76" fill="#6b6b6b" font-family="Microsoft YaHei UI, Segoe UI, sans-serif" font-size="12">单入口科研闭环 · P0-P3证据链 · MVP v0.3</text>
+  <line x1="28" y1="104" x2="312" y2="104" stroke="#e0ded8"/>
+  <text x="28" y="140" fill="#173d36" font-family="Microsoft YaHei UI, Segoe UI, sans-serif" font-size="17" font-weight="700">数据上传</text>
+  <rect x="28" y="160" width="284" height="112" rx="16" fill="#f8f6f0" stroke="#d8d2c5" stroke-dasharray="7 6"/>
+  <text x="70" y="222" fill="#6b6b6b" font-family="Microsoft YaHei UI, Segoe UI, sans-serif" font-size="14">拖入 GeoTIFF 文件（支持批量）</text>
+  <line x1="28" y1="300" x2="312" y2="300" stroke="#e0ded8"/>
+  <text x="28" y="336" fill="#173d36" font-family="Microsoft YaHei UI, Segoe UI, sans-serif" font-size="17" font-weight="700">会话状态</text>
+  <rect x="28" y="354" width="284" height="186" rx="12" fill="#fafaf8" stroke="#e0ded8"/>
+  <text x="48" y="388" fill="#6b6b6b" font-family="Cascadia Mono, Consolas, monospace" font-size="12">已上传: 27 files</text>
+  <text x="48" y="418" fill="#6b6b6b" font-family="Cascadia Mono, Consolas, monospace" font-size="12">阶段: 模型训练</text>
+  <text x="48" y="448" fill="#6b6b6b" font-family="Cascadia Mono, Consolas, monospace" font-size="12">Run ID: run_...</text>
+  <text x="48" y="478" fill="#e07b39" font-family="Cascadia Mono, Consolas, monospace" font-size="12" font-weight="700">门禁: PASS_WITH_RISKS</text>
+
+  <g transform="translate(380 36)">
+    <rect x="0" y="0" width="1000" height="32" rx="16" fill="#eef5ef"/>
+    <text x="24" y="21" fill="#1a6b5a" font-family="Microsoft YaHei UI, Segoe UI, sans-serif" font-size="12" font-weight="700">数据已加载 › 质量评估 › 特征构建 › 模型训练</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="380" y="84" width="1000" height="214" rx="26" fill="url(#hero)"/>
+    <rect x="380" y="84" width="1000" height="214" rx="26" fill="url(#grid)"/>
+    <circle cx="500" cy="116" r="155" fill="#e07b39" opacity="0.24"/>
+    <circle cx="1236" cy="100" r="150" fill="#b8956a" opacity="0.20"/>
+    <rect x="410" y="116" width="296" height="28" rx="14" stroke="#f7f4e9" stroke-opacity="0.24"/>
+    <text x="428" y="135" fill="#dac7a5" font-family="Cascadia Mono, Consolas, monospace" font-size="12" letter-spacing="2">EVIDENCE PLATFORM · EVIDENCE CHAIN</text>
+    <text x="410" y="194" fill="#f7f4e9" font-family="Microsoft YaHei UI, Segoe UI, sans-serif" font-size="54" font-weight="900" letter-spacing="-2">黑土区水蚀智能预测与证据化评估平台</text>
+    <text x="412" y="236" fill="#f7f4e9" fill-opacity="0.78" font-family="Microsoft YaHei UI, Segoe UI, sans-serif" font-size="15">单入口串联数据接入、预处理门禁、统一模型排行、解释分析、空间表达与证据包导出。</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="380" y="326" width="650" height="246" rx="22" fill="#fffdf8" stroke="#d8e7df"/>
+    <text x="408" y="362" fill="#173d36" font-family="Microsoft YaHei UI, Segoe UI, sans-serif" font-size="17" font-weight="800">主线推进状态</text>
+    <g transform="translate(408 386)">
+      <rect x="0" y="0" width="145" height="114" rx="18" fill="#fffdf8" stroke="#e7e1d4"/>
+      <text x="16" y="28" fill="#b8956a" font-family="Cascadia Mono" font-size="12" font-weight="800">P0</text>
+      <text x="16" y="58" fill="#173d36" font-family="Microsoft YaHei UI" font-size="15" font-weight="800">数据与门禁</text>
+      <text x="16" y="84" fill="#6b6b6b" font-family="Microsoft YaHei UI" font-size="11">文件识别 / 审计</text>
+      <rect x="162" y="0" width="145" height="114" rx="18" fill="#eaf4ef" stroke="#1a6b5a"/>
+      <text x="178" y="28" fill="#b8956a" font-family="Cascadia Mono" font-size="12" font-weight="800">P1</text>
+      <text x="178" y="58" fill="#173d36" font-family="Microsoft YaHei UI" font-size="15" font-weight="800">建模与排行</text>
+      <text x="178" y="84" fill="#6b6b6b" font-family="Microsoft YaHei UI" font-size="11">统一指标 / 最优模型</text>
+      <rect x="324" y="0" width="145" height="114" rx="18" fill="#fffdf8" stroke="#e7e1d4"/>
+      <text x="340" y="28" fill="#b8956a" font-family="Cascadia Mono" font-size="12" font-weight="800">P2</text>
+      <text x="340" y="58" fill="#173d36" font-family="Microsoft YaHei UI" font-size="15" font-weight="800">解释与空间</text>
+      <text x="340" y="84" fill="#6b6b6b" font-family="Microsoft YaHei UI" font-size="11">SHAP / 空间聚类</text>
+      <rect x="486" y="0" width="145" height="114" rx="18" fill="#fffdf8" stroke="#e7e1d4"/>
+      <text x="502" y="28" fill="#b8956a" font-family="Cascadia Mono" font-size="12" font-weight="800">P3</text>
+      <text x="502" y="58" fill="#173d36" font-family="Microsoft YaHei UI" font-size="15" font-weight="800">预测与交付</text>
+      <text x="502" y="84" fill="#6b6b6b" font-family="Microsoft YaHei UI" font-size="11">报告 / 证据包</text>
+    </g>
+    <rect x="408" y="522" width="136" height="44" rx="16" fill="#eef2ed"/>
+    <text x="424" y="540" fill="#7a766d" font-family="Microsoft YaHei UI" font-size="11">上传文件</text><text x="424" y="558" fill="#173d36" font-family="Cascadia Mono" font-size="18" font-weight="800">27</text>
+    <rect x="556" y="522" width="136" height="44" rx="16" fill="#eef2ed"/>
+    <text x="572" y="540" fill="#7a766d" font-family="Microsoft YaHei UI" font-size="11">识别变量</text><text x="572" y="558" fill="#173d36" font-family="Cascadia Mono" font-size="18" font-weight="800">5</text>
+    <rect x="704" y="522" width="136" height="44" rx="16" fill="#eef2ed"/>
+    <text x="720" y="540" fill="#7a766d" font-family="Microsoft YaHei UI" font-size="11">最优模型</text><text x="720" y="558" fill="#173d36" font-family="Cascadia Mono" font-size="18" font-weight="800">ExtraTrees</text>
+    <rect x="852" y="522" width="136" height="44" rx="16" fill="#eef2ed"/>
+    <text x="868" y="540" fill="#7a766d" font-family="Microsoft YaHei UI" font-size="11">证据文件</text><text x="868" y="558" fill="#173d36" font-family="Cascadia Mono" font-size="18" font-weight="800">42</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1050" y="326" width="330" height="246" rx="22" fill="#fffdf8" stroke="#d8e7df"/>
+    <text x="1076" y="362" fill="#173d36" font-family="Microsoft YaHei UI" font-size="17" font-weight="800">证据与门禁</text>
+    <rect x="1076" y="386" width="278" height="38" rx="14" fill="#f5f1e8"/><text x="1092" y="410" fill="#31423d" font-family="Microsoft YaHei UI" font-size="12">Run ID</text><text x="1196" y="410" fill="#0f4d3f" font-family="Cascadia Mono" font-size="12" font-weight="800">run_...</text>
+    <rect x="1076" y="434" width="278" height="38" rx="14" fill="#fff7ed"/><text x="1092" y="458" fill="#31423d" font-family="Microsoft YaHei UI" font-size="12">门禁结论</text><text x="1196" y="458" fill="#e07b39" font-family="Cascadia Mono" font-size="12" font-weight="800">PASS_WITH_RISKS</text>
+    <rect x="1076" y="482" width="278" height="38" rx="14" fill="#f5f1e8"/><text x="1092" y="506" fill="#31423d" font-family="Microsoft YaHei UI" font-size="12">源数据策略</text><text x="1196" y="506" fill="#0f4d3f" font-family="Microsoft YaHei UI" font-size="12" font-weight="800">只读 / 留痕</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="380" y="602" width="1000" height="134" rx="20" fill="#fffdf8" stroke="#d8e7df"/>
+    <text x="408" y="638" fill="#173d36" font-family="Microsoft YaHei UI" font-size="17" font-weight="800">设计系统与交互原型</text>
+    <rect x="408" y="660" width="292" height="80" rx="16" fill="#f7f3ea"/><text x="428" y="692" fill="#1a6b5a" font-family="Microsoft YaHei UI" font-size="13" font-weight="800">Field-station evidence platform</text><text x="428" y="718" fill="#6b6b6b" font-family="Microsoft YaHei UI" font-size="11">黑土 / 格网 / 野外观测 / 证据链</text>
+    <rect x="724" y="660" width="292" height="80" rx="16" fill="#f7f3ea"/><text x="744" y="692" fill="#1a6b5a" font-family="Microsoft YaHei UI" font-size="13" font-weight="800">P0 → P1 → P2 → P3</text><text x="744" y="718" fill="#6b6b6b" font-family="Microsoft YaHei UI" font-size="11">所有主按钮绑定真实 tools.py 调用</text>
+    <rect x="1040" y="660" width="314" height="80" rx="16" fill="#f7f3ea"/><text x="1060" y="692" fill="#1a6b5a" font-family="Microsoft YaHei UI" font-size="13" font-weight="800">Figma handoff package</text><text x="1060" y="718" fill="#6b6b6b" font-family="Cascadia Mono" font-size="11">docs/figma_handoff/</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="380" y="780" width="1000" height="150" rx="20" fill="#fffdf8" stroke="#d8e7df"/>
+    <text x="408" y="816" fill="#173d36" font-family="Microsoft YaHei UI" font-size="17" font-weight="800">AI 驱动工作流</text>
+    <rect x="408" y="840" width="220" height="54" rx="12" fill="#1a6b5a"/><text x="438" y="874" fill="white" font-family="Microsoft YaHei UI" font-size="14" font-weight="800">生成解释与空间图件</text>
+    <rect x="650" y="840" width="220" height="54" rx="12" fill="#fffdf8" stroke="#e0ded8"/><text x="692" y="874" fill="#173d36" font-family="Microsoft YaHei UI" font-size="14" font-weight="800">进行未来侵蚀预测</text>
+    <rect x="892" y="840" width="220" height="54" rx="12" fill="#fffdf8" stroke="#e0ded8"/><text x="944" y="874" fill="#173d36" font-family="Microsoft YaHei UI" font-size="14" font-weight="800">开始超参优化</text>
+    <rect x="1134" y="840" width="220" height="54" rx="12" fill="#fffdf8" stroke="#e0ded8"/><text x="1182" y="874" fill="#173d36" font-family="Microsoft YaHei UI" font-size="14" font-weight="800">查看模型对比</text>
+  </g>
+</svg>
