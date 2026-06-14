@@ -61,7 +61,7 @@ void main() {
       service = QualityControlService();
     });
 
-    test('质控通过 - 中等负载', () async {
+    test('质控通过 - 中等负荷', () async {
       final result = await service.performQualityControl(
         imageMetadata: mockImageMetadataMedium,
       );
@@ -148,7 +148,7 @@ void main() {
       service = PredictionService();
     });
 
-    test('推理低负载样品', () async {
+    test('推理低负荷样品', () async {
       final bundle = ModelBundle.fromJson(mockModelBundle);
       final featureVector = FeatureVector(
         sessionId: 'session_001',
@@ -181,7 +181,7 @@ void main() {
       expect(result.predictedValue, greaterThanOrEqualTo(0.0));
     });
 
-    test('推理高负载样品 - 接近上限警告', () async {
+    test('推理高负荷样品 - 接近上限警告', () async {
       final bundle = ModelBundle.fromJson(mockModelBundle);
       final featureVector = FeatureVector(
         sessionId: 'session_002',

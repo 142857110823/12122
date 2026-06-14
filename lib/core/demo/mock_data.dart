@@ -35,7 +35,7 @@ final mockModelBundle = {
   'metadata': {'hardware_profile_id': 'darkbox_v1'},
 };
 
-/// 模拟图像元数据 - 低负载（0.05 mg/cm2）
+/// 模拟图像元数据 - 低负荷（0.05 mg/cm2）
 final mockImageMetadataLow = {
   'saturation_ratio': 0.002,
   'laplacian_variance': 150.0,
@@ -55,7 +55,7 @@ final mockImageMetadataLow = {
   'roi_source': 'mock_image_low',
 };
 
-/// 模拟图像元数据 - 中等负载（0.35 mg/cm2）
+/// 模拟图像元数据 - 中等负荷（0.35 mg/cm2）
 final mockImageMetadataMedium = {
   'saturation_ratio': 0.003,
   'laplacian_variance': 155.0,
@@ -75,7 +75,7 @@ final mockImageMetadataMedium = {
   'roi_source': 'mock_image_medium',
 };
 
-/// 模拟图像元数据 - 高负载（0.70 mg/cm2）
+/// 模拟图像元数据 - 高负荷（0.70 mg/cm2）
 final mockImageMetadataHigh = {
   'saturation_ratio': 0.004,
   'laplacian_variance': 160.0,
@@ -189,8 +189,11 @@ final mockClickValidationCases = [
     'module': '模型包管理',
     'action': '点击"启用模型"',
     'mock_input': {'model_id': 'freshsalt_rgb_cucumber_darkbox_v1'},
-    'expected_output': {'status': 'success', 'active_model_id': 'freshsalt_rgb_cucumber_darkbox_v1'},
-    'assertion_rule': '模型激活成���',
+    'expected_output': {
+      'status': 'success',
+      'active_model_id': 'freshsalt_rgb_cucumber_darkbox_v1'
+    },
+    'assertion_rule': '模型激活成功',
   },
   {
     'case_id': 'M03_QC_PASS',
