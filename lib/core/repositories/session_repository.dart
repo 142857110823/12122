@@ -1,9 +1,8 @@
-import '../models/model_bundle.dart';
 import '../models/prediction_result.dart';
 import '../models/feature_vector.dart';
 
-/// 仓储接口 - 用于存储会话、结果、特征、点击日志
-/// 第一阶段采用内存实现，后续可替换为 SQLite/Drift
+/// 会话及结果仓储接口
+/// 用于存储采集预测的完整会话记录
 abstract class SessionRepository {
   /// 保存会话及其结果
   Future<void> saveSession({
@@ -35,7 +34,7 @@ abstract class SessionRepository {
   Future<void> clearAll();
 }
 
-/// 仓储接口实现 - 内存版本
+/// 内存实现
 class InMemorySessionRepository implements SessionRepository {
   final Map<String, Map<String, dynamic>> _sessionStore = {};
 
@@ -115,6 +114,6 @@ class InMemorySessionRepository implements SessionRepository {
     _sessionStore.clear();
   }
 
-  /// 获取所有会话数量（用于统计）
+  /// 获取所有会话数量
   int getSessionCount() => _sessionStore.length;
 }
